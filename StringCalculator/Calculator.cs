@@ -5,11 +5,11 @@ namespace StringCalculator
 {
     public class Calculator
     {
-        private readonly NumbersFormatter _formatter;
+        private readonly NumberParser[] _parsers;
 
-        public Calculator(NumbersFormatter formatter)
+        public Calculator(NumberParser[] parsers)
         {
-            _formatter = formatter;
+            _parsers = parsers;
         }
 
         public int Add(string numbers)
@@ -19,12 +19,16 @@ namespace StringCalculator
                 return 0;
             }
 
-            var calculationInfo = _formatter.Parse(numbers);
+            var parser = _parsers.FirstOrDefault(p => p.CanParse(numbers));
 
-            return calculationInfo.Input
-                .Split(calculationInfo.Delimiters, StringSplitOptions.RemoveEmptyEntries)
-                .Select(x => int.Parse(x))
-                .Sum();
+            if (parser == null)
+            {
+                throw new InvalidOperationException($"No parser found for the current numbers: {numbers}");
+            }
+
+            var sumands = parser.ParseNumbers(numbers);
+
+            return sumands.Sum();
         }
     }
 }

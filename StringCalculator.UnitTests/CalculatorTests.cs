@@ -10,7 +10,11 @@ namespace StringCalculator.UnitTests
 
         public CalculatorTests()
         {
-            _sut = new Calculator(new NumbersFormatter());
+            _sut = new Calculator(new NumberParser[]
+            {
+                new CustomDelimiterNumberParser(),
+                new DefaultNumberParser()
+            });
         }
 
         [Fact]

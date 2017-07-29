@@ -40,9 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalculationInfo.cs" />
     <Compile Include="Calculator.cs" />
-    <Compile Include="NumbersFormatter.cs" />
+    <Compile Include="CustomDelimiterNumberParser.cs" />
+    <Compile Include="NumberParser.cs" />
+    <Compile Include="DefaultNumberParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
